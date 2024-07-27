@@ -71,15 +71,14 @@ if [ "${tg_version}" = "${tg_installed_version}" ]; then
 else
   printf '%s\n' "Installed Verision: ${tg_installed_version}"
   printf '%s\n' "Latest Version: ${tg_version}"
+  tmp_dir="$(mktemp -d /tmp/tg.XXXXXXXX)"
+  cd "${tmp_dir}" || exit
 fi
 
 # Run clean_up function on exit
 trap clean_up EXIT
 
 # Download
-tmp_dir="$(mktemp -d /tmp/tg.XXXXXXXX)"
-cd "${tmp_dir}" || exit
-
 printf '%s\n' "[INFO] Downloading the terragrunt binary and verification files"
 curl -sL -o "${tmp_dir}/${tg_binary}" "${tg_url}/${tg_binary}"
 curl -sL -o "${tmp_dir}/${sum_file}" "${tg_url}/${sum_file}"
