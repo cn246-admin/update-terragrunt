@@ -1,6 +1,6 @@
 ## Update terragrunt
 
-This script installs (or updates) [terragrunt](https://terragrunt.gruntwork.io).
+This script installs (or updates) [terragrunt](https://terragrunt.gruntwork.io) on Linux and Mac.
 
 
 ### Usage
