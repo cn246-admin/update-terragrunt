@@ -5,12 +5,12 @@
 # https://terragrunt.gruntwork.io
 
 # Colored output
-code_grn () { tput setaf 2; printf '%s\n' "${1}"; tput sgr0; }
-code_red () { tput setaf 1; printf '%s\n' "${1}"; tput sgr0; }
-code_yel () { tput setaf 3; printf '%s\n' "${1}"; tput sgr0; }
+code_grn() { tput setaf 2; printf '%s\n' "${1}"; tput sgr0; }
+code_red() { tput setaf 1; printf '%s\n' "${1}"; tput sgr0; }
+code_yel() { tput setaf 3; printf '%s\n' "${1}"; tput sgr0; }
 
 # Define function to delete temporary install files
-clean_up () {
+clean_up() {
   printf '%s\n' "[INFO] Cleaning up install files"
   cd && rm -rf "${tmp_dir}"
 }
