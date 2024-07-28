@@ -24,7 +24,7 @@ tg_version="$(curl -Ls https://api.github.com/repos/gruntwork-io/terragrunt/rele
 
 tg_url="https://github.com/gruntwork-io/terragrunt/releases/download/${tg_version}/"
 
-if command -v terragrunt >/dev/null; then
+if command -v terragrunt >/dev/null 2>&1; then
   tg_installed_version="$(terragrunt --version)"
   tg_installed_version="${tg_installed_version##*\ }"
 else
