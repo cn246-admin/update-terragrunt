@@ -5,9 +5,9 @@
 # https://terragrunt.gruntwork.io
 
 # Colored output
-code_grn() { tput setaf 2; printf '%s\n' "${1}"; tput sgr0; }
-code_red() { tput setaf 1; printf '%s\n' "${1}"; tput sgr0; }
-code_yel() { tput setaf 3; printf '%s\n' "${1}"; tput sgr0; }
+code_err() { tput setaf 1; printf '%s\n' "$*" >&2; tput sgr0; }
+code_grn() { tput setaf 2; printf '%s\n' "$*"; tput sgr0; }
+code_yel() { tput setaf 3; printf '%s\n' "$*"; tput sgr0; }
 
 # Define function to delete temporary install files
 clean_up() {
@@ -47,7 +47,7 @@ case "$archi" in
     tg_binary="terragrunt_linux_amd64"
     ;;
   *)
-    code_red "[ERROR] OS not supported!"
+    code_err "[ERROR] OS not supported!"
     exit 1
     ;;
 esac
@@ -56,8 +56,8 @@ esac
 case :$PATH: in
   *:"${bin_dir}":*) ;;  # do nothing
   *)
-    code_red "[ERROR] ${bin_dir} was not found in \$PATH!"
-    code_red "Add ${bin_dir} to PATH or select another directory to install to"
+    code_err "[ERROR] ${bin_dir} was not found in \$PATH!"
+    code_err "Add ${bin_dir} to PATH or select another directory to install to"
     exit 1
     ;;
 esac
@@ -86,7 +86,7 @@ curl -sL -o "${tmp_dir}/${sum_file}" "${tg_url}/${sum_file}"
 # Verify
 printf '%s\n' "[INFO] Verifying ${tg_binary}"
 if ! shasum -qc --ignore-missing "${sum_file}"; then
-  code_red "[ERROR] Problem with checksum!"
+  code_err "[ERROR] Problem with checksum!"
   exit 1
 fi
 
